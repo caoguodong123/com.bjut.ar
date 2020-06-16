@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjut.ar.dao.UserDao">
+    <resultMap id="userMap" type="com.bjut.ar.bean.User">
+        <id property="id" column="id" />
+        <result property="account" column="account" />
+        <result property="name" column="name" />
+        <result property="password" column="password" />
+        <result property="gender" column="gender" />
+        <result property="phone" column="phone" />
+        <result property="token" column="token" />
+    </resultMap>
+    <select id="getAllUser" resultMap="userMap">
+        select * from t_user
+    </select>
+    <select id="getUserById" resultMap="userMap">
+        select * from t_user where id=#{id}
+    </select>
+    <select id="getUserByName" resultMap="userMap">
+        select * from t_user where name like concat('%',#{name },'%')
+    </select>
+    <update id="editUser">
+        update t_user set name=#{name },password=#{password },gender=#{gender },phone=#{phone }
+        <where>
+            id = #{id }
+        </where>
+    </update>
+    <delete id="deleteUserById">
+        delete from t_user where id=#{id }
+    </delete>
+    <insert id="addUser">
+        insert into t_user(account,password,name,gender,phone,token) values(#{account },#{password },#{name },#{gender },#{phone },#{token })
+    </insert>
+</mapper>

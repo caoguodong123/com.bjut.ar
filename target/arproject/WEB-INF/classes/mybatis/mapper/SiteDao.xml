@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjut.ar.dao.SiteDao">
+    <resultMap id="siteMap" type="com.bjut.ar.bean.Site">
+        <id property="id" column="id"/>
+        <result property="gid" column="gid"/>
+        <result property="horizontal" column="horizontal" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="vertical" column="vertical" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="x" column="x" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="y" column="y" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="compass" column="compass" javaType="Double" jdbcType="DOUBLE"/>
+        <result property="content" column="content"/>
+    </resultMap>
+    <select id="getSiteById" resultMap="siteMap">
+        select * from t_site where id=#{id}
+    </select>
+    <select id="getAllSite" resultMap="siteMap">
+        select * from t_site
+    </select>
+    <update id="updateSite" parameterType="com.bjut.ar.bean.Site">
+        update t_site set gid=#{gid },horizontal=#{horizontal },vertical=#{vertical },x=#{x },y=#{y },compass=#{compass },content=#{content }
+        where id=#{id }
+    </update>
+    <delete id="deleteSiteById">
+        delete from t_site where id=#{id }
+    </delete>
+    <insert id="insertSite">
+        insert into t_site(gid,horizontal,vertical,x,y,compass,content) values(#{gid },#{horizontal },#{vertical },#{x },#{y },#{compass },#{content })
+    </insert>
+</mapper>
